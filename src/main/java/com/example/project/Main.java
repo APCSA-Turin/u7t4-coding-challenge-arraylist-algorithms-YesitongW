@@ -1,6 +1,7 @@
 package com.example.project;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class Main{
     
@@ -14,9 +15,16 @@ public class Main{
     *  @param stringList  original arraylist of Strings
     *  @param str String to insert
     */
-    public static ArrayList<String> insertAfterI(ArrayList<String> stringList, String str){
-       return new ArrayList<String>();
+    public static ArrayList<String> insertAfterI(ArrayList<String> stringList, String str) {
+        for (int i = 0; i < stringList.size(); i++) {
+            if (stringList.get(i).contains("i")) {
+                stringList.add(i + 1, str);
+                i++; 
+            }
+        }
+        return stringList;
     }
+    
 
 
 
@@ -28,21 +36,31 @@ public class Main{
    *  @param stringList  original arraylist of Strings
    */
     public static ArrayList<String> removeThree(ArrayList<String> stringList){
-        return stringList;
-    }
+            for (int i = stringList.size() - 1; i >= 0; i--) {
+                if (stringList.get(i).length() == 3) {
+                    stringList.remove(i);
+                }
+            }
+            return stringList;
+        }
 
 
 
-    /** Returns an ArrayList with all elements of arr reversed
-   *
-   *  Does NOT mutate (modify) elements in intList.
-   *  PRECONDITION: intList.size() > 0
-   *
-   *  @param intList  original array of integers
-   */
-    public static ArrayList<Integer> reverseArray(int[] intList){
-        return new ArrayList<Integer>();
-    }
+        /** Returns an ArrayList with all elements of arr reversed
+         *
+         *  Does NOT mutate (modify) elements in intList.
+         *  PRECONDITION: intList.size() > 0
+         *
+         *  @param intList  original array of integers
+         */
+        public static ArrayList<Integer> reverseArray(int[] intList) {
+            ArrayList<Integer> reversed = new ArrayList<>();
+            for (int i = intList.length - 1; i >= 0; i--) {
+                reversed.add(intList[i]);
+            }
+            return reversed;
+        }
+        
 
 
 
@@ -58,7 +76,11 @@ public class Main{
      *
      *  @param wordList  arraylist of Strings
      */
-    public static ArrayList<String> duplicateUpperEnd(ArrayList<String> wordList){
+    public static ArrayList<String> duplicateUpperEnd(ArrayList<String> wordList) {
+        for (int i = 0; i < wordList.size(); i++) {
+            String uppercase = wordList.get(i).toUpperCase();
+            wordList.add(uppercase);
+        }
         return wordList;
     }
 
@@ -77,9 +99,23 @@ public class Main{
    *  @return  new arraylist of Strings containing the words of sentence
    */
 
-    public static ArrayList<String> parseSentence(String sentence){
-        return new ArrayList<String>();
+   public static ArrayList<String> parseSentence(String sentence){
+    ArrayList<String> parsedSentence = new ArrayList<>();
+    String currentWord = "";
+    for (int i = 0; i < sentence.length(); i++){
+        char c = sentence.charAt(i);
+
+        if(c != ' '){
+            currentWord += c;
+        } else {
+            parsedSentence.add(currentWord);
+            currentWord = "";
+        }
     }
+
+    parsedSentence.add(currentWord);
+    return parsedSentence;
+}
 
 
 
@@ -98,9 +134,21 @@ public class Main{
    *
    *  @param wordList  arraylist of words
    */
-    public static ArrayList<String> moveBWords(ArrayList<String> wordList){
-        return wordList;
+  public static ArrayList<String> moveBWords(ArrayList<String> wordList) {
+    ArrayList<String> bWords = new ArrayList<>();
+    ArrayList<String> otherWords = new ArrayList<>();
+
+    for (String word : wordList) {
+        if (word.toLowerCase().startsWith("b")) {
+            bWords.add(word);
+        } else {
+            otherWords.add(word);
+        }
     }
+
+    bWords.addAll(otherWords);
+    return bWords;
+}
 
 
 
@@ -114,8 +162,14 @@ public class Main{
      *  @param intList  intList of Integers
      */
     public static ArrayList<Integer> removeDuplicates(ArrayList<Integer> intList){
+        for (int i = 0; i < intList.size(); i++){
+            int current = intList.get(i);
+            for (int j = i + 1; j = intList.size())
+        }
         return intList;
     }
+
+
 
     // Given an array of ints, 
     // return true if the array is length 1 or more, 
