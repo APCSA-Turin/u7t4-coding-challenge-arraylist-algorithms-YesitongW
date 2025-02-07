@@ -344,42 +344,34 @@ public class Main{
     int maxFrequency = 0;
     boolean allSameFrequency = true;
 
-    int maxValue = numList[0]; // Find the max
+    // Find the maximum value in numList
+    int maxValue = numList[0];
     for (int num : numList) {
-        if (num > maxValue) {
-            maxValue = num;
-        }
+        if (num > maxValue) maxValue = num;
     }
 
-    int[] frequencies = new int[maxValue + 1];// store freq
-
-    for (int num : numList) { // Count freq
+    // Count frequencies
+    int[] frequencies = new int[maxValue + 1];
+    for (int num : numList) {
         frequencies[num]++;
-        if (frequencies[num] > maxFrequency) {
-            maxFrequency = frequencies[num];
-        }
+        if (frequencies[num] > maxFrequency) maxFrequency = frequencies[num];
     }
 
-    int firstNonZeroFrequency = 0; // Check if all freq are the same
+    // Check if all non-zero frequencies are the same
+    int firstNonZeroFrequency = 0;
     int i = 0;
     while (i < frequencies.length && allSameFrequency) {
         if (frequencies[i] != 0) {
-            if (firstNonZeroFrequency == 0) {
-                firstNonZeroFrequency = frequencies[i];
-            } else if (frequencies[i] != firstNonZeroFrequency) {
-                allSameFrequency = false;
-            }
+            if (firstNonZeroFrequency == 0) firstNonZeroFrequency = frequencies[i];
+            else if (frequencies[i] != firstNonZeroFrequency) allSameFrequency = false;
         }
         i++;
     }
 
-   
-    if (!allSameFrequency) { // all freq are the same
-        // Collect modes
+    // Collect modes if frequencies are not all the same
+    if (!allSameFrequency) {
         for (int j = 0; j < frequencies.length; j++) {
-            if (frequencies[j] == maxFrequency) {
-                modeList.add(j);
-            }
+            if (frequencies[j] == maxFrequency) modeList.add(j);
         }
     }
 
