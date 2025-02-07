@@ -2,28 +2,25 @@ package com.example.project;
 
 import java.util.*;
 
-public class Test{
+public class Test {
     public static void main(String[] args) {
-        String sentence = "This is a random sentence!";
-        System.out.println(parseSentence(sentence));
+        ArrayList<String> word = new ArrayList<>();
+        word.add("Hello");
+        word.add("World");
+        word.add("Hi");
+
+        ArrayList<String> result = duplicateUpperEnd(word);
+        System.out.println(result);
     }
 
-    public static ArrayList<String> parseSentence(String sentence){
-        ArrayList<String> parsedSentence = new ArrayList<>();
-        String currentWord = "";
-        for (int i = 0; i < sentence.length(); i++){
-            char c = sentence.charAt(i);
-
-            if(c != ' '){
-                currentWord += c;
-            } else {
-                parsedSentence.add(currentWord);
-                currentWord = "";
-            }
+    public static ArrayList<String> duplicateUpperEnd(ArrayList<String> wordList) {
+        int initialSize = wordList.size();
+        for (int i = 0; i < initialSize; i++) {
+            String uppercase = wordList.get(i).toUpperCase();
+            wordList.add(uppercase);
         }
-
-        parsedSentence.add(currentWord);
-        return parsedSentence;
+        return wordList;
     }
 }
+
 
