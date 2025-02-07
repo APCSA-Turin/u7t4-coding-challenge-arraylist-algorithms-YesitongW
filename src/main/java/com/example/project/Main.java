@@ -1,7 +1,6 @@
 package com.example.project;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class Main{
     
@@ -292,25 +291,25 @@ public class Main{
         int i = 0;
         
         while (i < list.size()) {
-            if (list.get(i) == 3) {
+            if (list.get(i) == 3) { // looks for 3
                 int j = 0;
                 boolean swapped = false;
                 
-                while (j < list.size() && !swapped) {
-                    if (list.get(j) == 4 && (j == 0 || list.get(j - 1) != 3)) {
-                        // Swap the number after 3 with this 4
-                        int temp = list.get(i + 1);
-                        list.set(i + 1, 4);
-                        list.set(j, temp);
-                        swapped = true;
-                    }
-                    j++;
+            while (j < list.size() && !swapped) { //looks for 4 thats not after 3
+                if (list.get(j) == 4 && (j == 0 || list.get(j - 1) != 3)) {
+                // Swap the number after 3 with this 4
+                    int temp = list.get(i + 1);
+                    list.set(i + 1, 4);
+                    list.set(j, temp);
+                    swapped = true;
                 }
+                j++;
             }
-            i++;
         }
+        i++;
+    }
         
-        return list;
+    return list;
     }
     
 
@@ -345,51 +344,47 @@ public class Main{
     int maxFrequency = 0;
     boolean allSameFrequency = true;
 
-    // Find the max
-    int maxValue = numList[0];
+    int maxValue = numList[0]; // Find the max
     for (int num : numList) {
         if (num > maxValue) {
             maxValue = num;
         }
     }
 
-    // Create an array to store frequencies
-    int[] frequencies = new int[maxValue + 1];
+    int[] frequencies = new int[maxValue + 1];// store freq
 
-    // Count freq
-    for (int num : numList) {
+    for (int num : numList) { // Count freq
         frequencies[num]++;
         if (frequencies[num] > maxFrequency) {
             maxFrequency = frequencies[num];
         }
     }
 
-    // Check if all freq are the same
-    int firstNonZeroFrequency = 0;
-    for (int freq : frequencies) {
-        if (freq != 0) {
+    int firstNonZeroFrequency = 0; // Check if all freq are the same
+    int i = 0;
+    while (i < frequencies.length && allSameFrequency) {
+        if (frequencies[i] != 0) {
             if (firstNonZeroFrequency == 0) {
-                firstNonZeroFrequency = freq;
-            } else if (freq != firstNonZeroFrequency) {
+                firstNonZeroFrequency = frequencies[i];
+            } else if (frequencies[i] != firstNonZeroFrequency) {
                 allSameFrequency = false;
-                break;
             }
         }
+        i++;
     }
 
-    // all freq are the same
-    if (allSameFrequency) {
-        return modeList;
-    }
-
-    // Collect modes
-    for (int i = 0; i < frequencies.length; i++) {
-        if (frequencies[i] == maxFrequency) {
-            modeList.add(i);
+   
+    if (!allSameFrequency) { // all freq are the same
+        // Collect modes
+        for (int j = 0; j < frequencies.length; j++) {
+            if (frequencies[j] == maxFrequency) {
+                modeList.add(j);
+            }
         }
     }
 
     return modeList;
 }
+
 
 }
